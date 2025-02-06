@@ -6,4 +6,5 @@ public sealed record GetStatementsRequest(
 	List<Districts> Districts,
 	Currency Currency,
 	PriceRange Price,
-	AreaRange Area);
+	AreaRange Area,
+	OwnerType Owner);

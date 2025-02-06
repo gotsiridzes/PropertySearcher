@@ -12,16 +12,8 @@ public class AreaRangeConverter : IQueryParameterValueConverter
 		var areaRange = (AreaRange)value;
 		return
 		[
-			new("area_from", areaRange.AreaFrom.ToString(CultureInfo.InvariantCulture)),
-			new("area_to", areaRange.AreaTo.ToString(CultureInfo.InvariantCulture))
+			new($"{key}_from", areaRange.AreaFrom.ToString(CultureInfo.InvariantCulture)),
+			new($"{key}_to", areaRange.AreaTo.ToString(CultureInfo.InvariantCulture))
 		];
 	}
-}
-
-public class OwnerTypeConverter : IQueryParameterValueConverter
-{
-	public bool CanConvert(object value) => value is OwnerType;
-
-	public IEnumerable<KeyValuePair<string, string>> Convert(object value, string key) =>
-		[new(key, ((OwnerType)value).ToString())];
 }

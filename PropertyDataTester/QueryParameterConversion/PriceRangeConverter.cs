@@ -12,8 +12,8 @@ public class PriceRangeConverter : IQueryParameterValueConverter
 		var priceRange = (PriceRange)value;
 		return
 		[
-			new("price_from", priceRange.PriceFrom.ToString(CultureInfo.InvariantCulture)),
-			new("price_to", priceRange.PriceTo.ToString(CultureInfo.InvariantCulture))
+			new($"{key}_from", priceRange.PriceFrom.ToString(CultureInfo.InvariantCulture)),
+			new($"{key}_to", priceRange.PriceTo.ToString(CultureInfo.InvariantCulture))
 		];
 	}
 }

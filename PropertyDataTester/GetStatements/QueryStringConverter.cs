@@ -13,16 +13,20 @@ public static class QueryStringConverter
 		{ "Currency", "currency_id" },
 		{ "Price", "price" },
 		{ "Area", "area" },
-		//{ "Owner", "owner_type" }
+		{ "Owner", "owner_type" }
 	};
 
-	private static readonly List<IQueryParameterValueConverter> Converters =
+	private static readonly Dictionary<Type, IQueryParameterValueConverter> TypeConverterMapping = new()
+	{
+		{ typeof(PriceRange), new PriceRangeConverter() },
+		{ typeof(AreaRange), new AreaRangeConverter() },
+		{ typeof(OwnerType), new OwnerTypeConverter() }
+	};
+
+	private static readonly List<IQueryParameterValueConverter> GenericConverters =
 	[
 		new EnumListConverter(),
-		new EnumConverter(),
-		new PriceRangeConverter(),
-		new AreaRangeConverter(),
-		//new OwnerTypeConverter()
+		new EnumConverter()
 	];
 
 	public static string ToQueryString(this object self)
@@ -38,14 +42,27 @@ public static class QueryStringConverter
 			if (value == null)
 				continue;
 
-			var converter = Converters.FirstOrDefault(c => c.CanConvert(value)) ??
-			                throw new InvalidOperationException(
-				                $"No converter found for property '{prop.Name}' of type '{value.GetType()}'.");
+			if (TypeConverterMapping.TryGetValue(prop.PropertyType, out var typeSpecificConverter))
+			{
+				AddQueryParameters(queryParams, typeSpecificConverter.Convert(value, key));
+				continue;
+			}
 
-			queryParams.AddRange(converter.Convert(value, key).Select(pair =>
-				$"{HttpUtility.UrlEncode(pair.Key)}={HttpUtility.UrlEncode(pair.Value)}"));
+			var genericConverter = GenericConverters.FirstOrDefault(c => c.CanConvert(value));
+			if (genericConverter != null)
+			{
+				AddQueryParameters(queryParams, genericConverter.Convert(value, key));
+				continue;
+			}
+
+			throw new InvalidOperationException(
+				$"No converter found for property '{prop.Name}' of type '{prop.PropertyType}'.");
 		}
 
 		return string.Join("&", queryParams);
 	}
+
+	private static void AddQueryParameters(List<string> queryParams, IEnumerable<KeyValuePair<string, string>> pairs) =>
+		queryParams.AddRange(pairs.Select(pair =>
+			$"{HttpUtility.UrlEncode(pair.Key)}={HttpUtility.UrlEncode(pair.Value)}"));
 }

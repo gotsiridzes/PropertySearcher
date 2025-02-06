@@ -22,8 +22,9 @@ public sealed class RealEstateApiClient
 			[RealEstateType.Flat],
 			[Districts.VakeSaburtalo],
 			Currency.Usd,
-			new(10_000, 40_000),
-			new(40, 70));
+			Price: new(10_000, 40_000),
+			Area: new(40, 70),
+			OwnerType.Physical);
 
 		var apiUrl = $"{endpoint}?{request.ToQueryString()}";
 
