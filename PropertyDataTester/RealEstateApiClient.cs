@@ -26,9 +26,7 @@ public sealed class RealEstateApiClient
 			Area: new(40, 70),
 			OwnerType.Physical);
 
-		var apiUrl = $"{endpoint}?{request.ToQueryString()}";
-
-		var response = await _httpClient.GetStringAsync(apiUrl);
+		var response = await _httpClient.GetStringAsync($"{endpoint}?{request.ToQueryString()}");
 		return response;
 	}
 }
