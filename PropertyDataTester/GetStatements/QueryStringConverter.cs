@@ -10,7 +10,7 @@ public static class QueryStringConverter
 		{ "DealTypes", "deal_types" },
 		{ "RealEstateTypes", "real_estate_types" },
 		{ "Districts", "districts" },
-		{ "Currency", "currency_id"},
+		{ "Currency", "currency_id" },
 		{ "Price", "price" },
 		{ "Area", "area" },
 		//{ "Owner", "owner_type" }
@@ -38,9 +38,12 @@ public static class QueryStringConverter
 			if (value == null)
 				continue;
 
-			var converter = Converters.FirstOrDefault(c => c.CanConvert(value)) ?? throw new InvalidOperationException($"No converter found for property '{prop.Name}' of type '{value.GetType()}'.");
+			var converter = Converters.FirstOrDefault(c => c.CanConvert(value)) ??
+			                throw new InvalidOperationException(
+				                $"No converter found for property '{prop.Name}' of type '{value.GetType()}'.");
 
-			queryParams.AddRange(converter.Convert(value, key).Select(pair => $"{HttpUtility.UrlEncode(pair.Key)}={HttpUtility.UrlEncode(pair.Value)}"));
+			queryParams.AddRange(converter.Convert(value, key).Select(pair =>
+				$"{HttpUtility.UrlEncode(pair.Key)}={HttpUtility.UrlEncode(pair.Value)}"));
 		}
 
 		return string.Join("&", queryParams);

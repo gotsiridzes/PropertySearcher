@@ -8,7 +8,7 @@ public class EnumListConverter : IQueryParameterValueConverter
 		value is IEnumerable list && list.Cast<object>().All(x => x is Enum);
 
 	public IEnumerable<KeyValuePair<string, string>> Convert(object value, string key) =>
-		[
-			new(key, string.Join(",", ((IEnumerable)value).Cast<Enum>().Select(System.Convert.ToInt32)))
-		];
+	[
+		new(key, string.Join(",", ((IEnumerable)value).Cast<Enum>().Select(System.Convert.ToInt32)))
+	];
 }

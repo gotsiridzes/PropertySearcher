@@ -10,7 +10,7 @@ public class PriceRangeConverter : IQueryParameterValueConverter
 	public IEnumerable<KeyValuePair<string, string>> Convert(object value, string key)
 	{
 		var priceRange = (PriceRange)value;
-		return 
+		return
 		[
 			new("price_from", priceRange.PriceFrom.ToString(CultureInfo.InvariantCulture)),
 			new("price_to", priceRange.PriceTo.ToString(CultureInfo.InvariantCulture))
