@@ -4,8 +4,8 @@ namespace PropertyDataTester;
 
 public sealed class RealEstateApiClient
 {
-	private readonly HttpClient _httpClient;
 	private const string BaseUrl = "https://api-statements.tnet.ge/v1";
+	private readonly HttpClient _httpClient;
 
 	public RealEstateApiClient()
 	{
@@ -15,31 +15,17 @@ public sealed class RealEstateApiClient
 
 	public async Task<string> GetRealEstateStatementsAsync()
 	{
-		var endpoint = $"{BaseUrl}/statements";
-		//var query = new Dictionary<string, string>
-		//{
-		//	{ "cities", "1" },
-		//	{ "urbans", "38,40,41,42,43,44,45,46,47,101,28" },
-		//	{ "districts", "4" },
-		//	{ "currency_id", "2" },
-		//	{ "price_from", "10000" },
-		//	{ "price_to", "70000" },
-		//	{ "area_from", "40" },
-		//	{ "area_types", "1" },
-		//	{ "page", "1" }
-		//};
+		const string endpoint = $"{BaseUrl}/statements";
+
 		var request = new GetStatementsRequest(
 			[DealType.Sale],
 			[RealEstateType.Flat],
 			[Districts.VakeSaburtalo],
-			Currency.Usd, 
-			new PriceRange(10_000,40_000),
-			new AreaRange(40, 70),
-			OwnerType.Physical);
+			Currency.Usd,
+			new(10_000, 40_000),
+			new(40, 70));
 
-		var queryString = request.ToQueryString();
-		var apiUrl = $"{endpoint}?{queryString}";
-		//var apiUrl2 = @"https://api-statements.tnet.ge/v1/statements?&urbans=38%2C40%2C41%2C42%2C43%2C44%2C45%2C46%2C47%2C101%2C28&districts=4&currency_id=2&price_from=10000&price_to=70000&area_from=40&area_types=1&page=1";
+		var apiUrl = $"{endpoint}?{request.ToQueryString()}";
 
 		var response = await _httpClient.GetStringAsync(apiUrl);
 		return response;
