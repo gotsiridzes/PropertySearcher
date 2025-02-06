@@ -10,9 +10,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{AC186B69-F
 		Roadmap.md = Roadmap.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyDataTester", "PropertyDataTester\PropertyDataTester.csproj", "{9E220F65-29A9-42E9-9223-1C98D97FECC0}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E220F65-29A9-42E9-9223-1C98D97FECC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E220F65-29A9-42E9-9223-1C98D97FECC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E220F65-29A9-42E9-9223-1C98D97FECC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E220F65-29A9-42E9-9223-1C98D97FECC0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9E220F65-29A9-42E9-9223-1C98D97FECC0} = {7594AB75-4157-4217-A6DD-0D2EDBC0BDB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D109111-89E2-4CBB-A18B-0EE27F9F93D5}
