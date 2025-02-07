@@ -13,14 +13,17 @@ public static class QueryStringConverter
 		{ "Currency", "currency_id" },
 		{ "Price", "price" },
 		{ "Area", "area" },
-		{ "Owner", "owner_type" }
+		{ "Owner", "owner_type" },
+		{ "StatementPosition", "not_available_in_this_context" },
+		{ "BuildingStatuses", "statuses" }
 	};
 
 	private static readonly Dictionary<Type, IQueryParameterValueConverter> TypeConverterMapping = new()
 	{
 		{ typeof(PriceRange), new PriceRangeConverter() },
 		{ typeof(AreaRange), new AreaRangeConverter() },
-		{ typeof(OwnerType), new OwnerTypeConverter() }
+		{ typeof(OwnerType), new OwnerTypeConverter() },
+		{ typeof(StatementPosition), new StatementPositionConverter() }
 	};
 
 	private static readonly List<IQueryParameterValueConverter> GenericConverters =

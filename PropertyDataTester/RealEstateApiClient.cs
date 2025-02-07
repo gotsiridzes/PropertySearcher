@@ -17,6 +17,7 @@ public sealed class RealEstateApiClient
 	{
 		const string endpoint = $"{BaseUrl}/statements";
 
+		var notFirstNotLast = StatementPosition.Create(true, true, false);
 		var request = new GetStatementsRequest(
 			[DealType.Sale],
 			[RealEstateType.Flat],
@@ -24,7 +25,9 @@ public sealed class RealEstateApiClient
 			Currency.Usd,
 			Price: new(10_000, 40_000),
 			Area: new(40, 70),
-			OwnerType.Physical);
+			OwnerType.Physical,
+			notFirstNotLast,
+			[BuildingStatus.New, BuildingStatus.Old]);
 
 		var response = await _httpClient.GetStringAsync($"{endpoint}?{request.ToQueryString()}");
 		return response;
