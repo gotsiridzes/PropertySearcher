@@ -27,7 +27,8 @@ public sealed class RealEstateApiClient
 			Area: new(40, 70),
 			OwnerType.Physical,
 			notFirstNotLast,
-			[BuildingStatus.New, BuildingStatus.Old]);
+			[BuildingStatus.New, BuildingStatus.Old],
+			OrderBy.Price.Asc);
 
 		var response = await _httpClient.GetStringAsync($"{endpoint}?{request.ToQueryString()}");
 		return response;

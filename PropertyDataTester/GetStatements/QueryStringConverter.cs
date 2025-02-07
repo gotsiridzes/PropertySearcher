@@ -15,7 +15,8 @@ public static class QueryStringConverter
 		{ "Area", "area" },
 		{ "Owner", "owner_type" },
 		{ "StatementPosition", "not_available_in_this_context" },
-		{ "BuildingStatuses", "statuses" }
+		{ "BuildingStatuses", "statuses" },
+		{ "Order", "order_by" }
 	};
 
 	private static readonly Dictionary<Type, IQueryParameterValueConverter> TypeConverterMapping = new()
@@ -23,7 +24,8 @@ public static class QueryStringConverter
 		{ typeof(PriceRange), new PriceRangeConverter() },
 		{ typeof(AreaRange), new AreaRangeConverter() },
 		{ typeof(OwnerType), new OwnerTypeConverter() },
-		{ typeof(StatementPosition), new StatementPositionConverter() }
+		{ typeof(StatementPosition), new StatementPositionConverter() },
+		{ typeof(OrderCriteria), new OrderingConverter() }
 	};
 
 	private static readonly List<IQueryParameterValueConverter> GenericConverters =
