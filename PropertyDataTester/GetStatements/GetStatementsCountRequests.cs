@@ -1,6 +1,6 @@
 ﻿namespace PropertyDataTester.GetStatements;
 
-public record GetStatementsRequest(
+public record GetStatementsCountRequests(
 	List<DealType> DealTypes,
 	List<RealEstateType> RealEstateTypes,
 	List<Districts> Districts,
@@ -12,6 +12,3 @@ public record GetStatementsRequest(
 	List<BuildingStatus> BuildingStatuses,
 	OrderCriteria Order) : GetStatementBaseRequest(DealTypes, RealEstateTypes, Districts, Currency, Price, Area, Owner,
 	StatementPosition, BuildingStatuses, Order);
-
-// TODO: // After fulfilling this details - need to take care of paging to get all the data.
-// After all of this - need to implement builder pattern because not all the parameters are required, and potential caller will be able to use only the ones he needs.

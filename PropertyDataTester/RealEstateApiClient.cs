@@ -32,7 +32,7 @@ public sealed class RealEstateApiClient
 
 	public async Task<string> GetRealEstateStatementsCountAsync()
 	{
-		var request = new GetStatementsRequest(
+		var request = new GetStatementsCountRequests(
 			[DealType.Sale],
 			[RealEstateType.Flat],
 			[Districts.VakeSaburtalo],
