@@ -1,5 +1,8 @@
 ﻿using PropertyDataTester;
 
-var response = await new RealEstateApiClient().GetRealEstateStatementsAsync();
+//var response = await new RealEstateApiClient().GetRealEstateStatementsAsync();
 
-Console.WriteLine(response);
+var statementCounts = await new RealEstateApiClient().GetRealEstateStatementsCountAsync();
+var statement = await new RealEstateApiClient().GetRealEstateStatementsAsync();
+
+Console.ReadLine();
