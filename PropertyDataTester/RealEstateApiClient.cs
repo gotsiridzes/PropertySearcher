@@ -15,9 +15,6 @@ public sealed class RealEstateApiClient
 
 	public async Task<string> GetRealEstateStatementsAsync()
 	{
-		var endpoint = $"{BaseUrl}/statements";
-
-		var notFirstNotLast = StatementPosition.Create(true, true, false);
 		var request = new GetStatementsRequest(
 			[DealType.Sale],
 			[RealEstateType.Flat],
@@ -26,18 +23,15 @@ public sealed class RealEstateApiClient
 			Price: new(10_000, 140_000),
 			Area: new(40, 70),
 			OwnerType.Physical,
-			notFirstNotLast,
+			StatementPosition.Create(true, true, false),
 			[BuildingStatus.New, BuildingStatus.Old],
 			OrderBy.Price.Asc);
 
-		return await _httpClient.GetStringAsync($"{endpoint}?{request.ToQueryString()}");
+		return await _httpClient.GetStringAsync($"{BaseUrl}/statements?{request.ToQueryString()}");
 	}
 
 	public async Task<string> GetRealEstateStatementsCountAsync()
 	{
-		var endpoint = $"{BaseUrl}/statements/count";
-
-		var notFirstNotLast = StatementPosition.Create(true, true, false);
 		var request = new GetStatementsRequest(
 			[DealType.Sale],
 			[RealEstateType.Flat],
@@ -46,10 +40,10 @@ public sealed class RealEstateApiClient
 			Price: new(10_000, 140_000),
 			Area: new(40, 70),
 			OwnerType.Physical,
-			notFirstNotLast,
+			StatementPosition.Create(true, true, false),
 			[BuildingStatus.New, BuildingStatus.Old],
 			OrderBy.Price.Asc);
 
-		return await _httpClient.GetStringAsync($"{endpoint}?{request.ToQueryString()}");
+		return await _httpClient.GetStringAsync($"{BaseUrl}/statements/count?{request.ToQueryString()}");
 	}
 }
