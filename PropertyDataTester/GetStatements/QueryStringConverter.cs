@@ -16,7 +16,8 @@ public static class QueryStringConverter
 		{ "Owner", "owner_type" },
 		{ "StatementPosition", "not_available_in_this_context" },
 		{ "BuildingStatuses", "statuses" },
-		{ "Order", "order_by" }
+		{ "Order", "order_by" },
+		{ "Page", "page" }
 	};
 
 	private static readonly Dictionary<Type, IQueryParameterValueConverter> TypeConverterMapping = new()
@@ -31,7 +32,8 @@ public static class QueryStringConverter
 	private static readonly List<IQueryParameterValueConverter> GenericConverters =
 	[
 		new EnumListConverter(),
-		new EnumConverter()
+		new EnumConverter(),
+		new DefaultConverter()
 	];
 
 	public static string ToQueryString(this object self)

@@ -10,4 +10,5 @@ public abstract record GetStatementBaseRequest(
 	OwnerType Owner,
 	StatementPosition StatementPosition,
 	List<BuildingStatus> BuildingStatuses,
-	OrderCriteria Order);
+	OrderCriteria Order,
+	int Page);

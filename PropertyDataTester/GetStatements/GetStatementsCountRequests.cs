@@ -10,5 +10,6 @@ public record GetStatementsCountRequests(
 	OwnerType Owner,
 	StatementPosition StatementPosition,
 	List<BuildingStatus> BuildingStatuses,
-	OrderCriteria Order) : GetStatementBaseRequest(DealTypes, RealEstateTypes, Districts, Currency, Price, Area, Owner,
-	StatementPosition, BuildingStatuses, Order);
+	OrderCriteria Order,
+	int Page) : GetStatementBaseRequest(DealTypes, RealEstateTypes, Districts, Currency, Price, Area, Owner,
+	StatementPosition, BuildingStatuses, Order, Page);

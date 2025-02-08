@@ -73,4 +73,6 @@ public record RealEstateStatement
 	[JsonPropertyName("user_type")] public UserType UserType { get; set; }
 
 	[JsonPropertyName("parameters")] public IReadOnlyCollection<PropertyParameter> Parameters { get; set; } = [];
+	[JsonPropertyName("dynamic_title")] public string DynamicTitle { get; set; }
+	[JsonPropertyName("slug")] public string Slug { get; set; }
 }
