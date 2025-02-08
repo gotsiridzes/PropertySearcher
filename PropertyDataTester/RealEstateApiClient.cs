@@ -1,4 +1,5 @@
-﻿using PropertyDataTester.GetStatements;
+﻿using System.Text.Json;
+using PropertyDataTester.GetStatements;
 
 namespace PropertyDataTester;
 
@@ -13,37 +14,31 @@ public sealed class RealEstateApiClient
 		_httpClient.DefaultRequestHeaders.Add("X-Website-Key", "myhome");
 	}
 
-	public async Task<string> GetRealEstateStatementsAsync()
+	public async Task<GetStatementsResponse> GetRealEstateStatementsAsync()
 	{
 		var request = new GetStatementsRequest(
 			[DealType.Sale],
 			[RealEstateType.Flat],
 			[Districts.VakeSaburtalo],
 			Currency.Usd,
-			Price: new(10_000, 140_000),
+			Price: new(0, 140_000),
 			Area: new(40, 70),
 			OwnerType.Physical,
 			StatementPosition.Create(true, true, false),
-			[BuildingStatus.New, BuildingStatus.Old],
+			[BuildingStatus.Old],
 			OrderBy.Price.Asc);
 
-		return await _httpClient.GetStringAsync($"{BaseUrl}/statements?{request.ToQueryString()}");
+		var response = await _httpClient.GetAsync($"{BaseUrl}/statements?{request.ToQueryString()}");
+		response.EnsureSuccessStatusCode();
+
+		return JsonSerializer.Deserialize<GetStatementsResponse>(await response.Content.ReadAsStringAsync()) ??
+		       throw new("Error occured during response mapping");
 	}
 
-	public async Task<string> GetRealEstateStatementsCountAsync()
+	public async Task<string> GetPaginationInfoAsync(GetStatementBaseRequest request)
 	{
-		var request = new GetStatementsCountRequests(
-			[DealType.Sale],
-			[RealEstateType.Flat],
-			[Districts.VakeSaburtalo],
-			Currency.Usd,
-			Price: new(10_000, 140_000),
-			Area: new(40, 70),
-			OwnerType.Physical,
-			StatementPosition.Create(true, true, false),
-			[BuildingStatus.New, BuildingStatus.Old],
-			OrderBy.Price.Asc);
+		var req = request as GetStatementsCountRequests;
 
-		return await _httpClient.GetStringAsync($"{BaseUrl}/statements/count?{request.ToQueryString()}");
+		return await _httpClient.GetStringAsync($"{BaseUrl}/statements/count?{req.ToQueryString()}");
 	}
 }

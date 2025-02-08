@@ -1,8 +1,10 @@
-﻿namespace PropertyDataTester.GetStatements;
+﻿using System.Runtime.Serialization;
+
+namespace PropertyDataTester.GetStatements;
 
 public enum OwnerType
 {
-	Physical,
+	[EnumMember(Value = "physical")] Physical,
 	Developer,
 	Agent
 }
