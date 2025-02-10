@@ -14,18 +14,18 @@ public sealed class RealEstateApiClient
 		_httpClient.DefaultRequestHeaders.Add("X-Website-Key", "myhome");
 	}
 
-	public async Task<List<RealEstateStatement>> GetRealEstateStatementsAsync()
+	public async Task<List<RealEstateStatement>> GetFilteredRealEstateStatementsAsync()
 	{
 		var request = new GetStatementsRequest(
 			[DealType.Sale],
 			[RealEstateType.Flat],
 			[Districts.VakeSaburtalo],
 			Currency.Usd,
-			Price: new(0, 140_000),
-			Area: new(40, 70),
-			OwnerType.Agent,
-			StatementPosition.Create(true, true, false),
-			[BuildingStatus.Old],
+			Price: new(0, 65000),
+			Area: new(35, 100),
+			OwnerType.Physical,
+			StatementPosition.Create(true, false, false),
+			[BuildingStatus.Old, BuildingStatus.New],
 			OrderBy.Price.Asc, Page: 1);
 
 		var paginationInfo = await GetPaginationInfoAsync();
@@ -35,7 +35,9 @@ public sealed class RealEstateApiClient
 
 		for (var page = paginationInfo.Data.Page; page <= paginationInfo.Data.LastPage; page++)
 		{
+			var dateTimeOffset = DateTimeOffset.UtcNow;
 			var pageData = await GetStatementsByPageAsync(page);
+			Console.WriteLine("Page {0} took {1} ms", page, (DateTimeOffset.UtcNow - dateTimeOffset).TotalMilliseconds);
 			result.AddRange(pageData);
 			Console.WriteLine("Processing {0} page", page);
 		}
@@ -77,4 +79,10 @@ public sealed class RealEstateApiClient
 			       throw new("Error occured during response mapping");
 		}
 	}
+
+	public List<byte[]> GetRealEstateImages(RealEstateStatement statement) => statement.Images
+		.Select(x => _httpClient.GetByteArrayAsync(x.Large)
+			.GetAwaiter()
+			.GetResult())
+		.ToList();
 }
