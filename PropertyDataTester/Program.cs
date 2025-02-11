@@ -7,5 +7,5 @@ using PropertyDataTester;
 var realEstateApiClient = new RealEstateApiClient();
 var statements = await realEstateApiClient.GetFilteredRealEstateStatementsAsync();
 
-var images = realEstateApiClient.GetRealEstateImages(statements.First());
+var images = realEstateApiClient.GetRealEstateImagesAsync(statements.First());
 Console.ReadLine();

@@ -10,7 +10,7 @@ public sealed class RealEstateApiClient
 
 	public RealEstateApiClient()
 	{
-		_httpClient = new();
+		_httpClient = new HttpClient();
 		_httpClient.DefaultRequestHeaders.Add("X-Website-Key", "myhome");
 	}
 
@@ -21,12 +21,12 @@ public sealed class RealEstateApiClient
 			[RealEstateType.Flat],
 			[Districts.VakeSaburtalo],
 			Currency.Usd,
-			Price: new(0, 65000),
-			Area: new(35, 100),
+			new PriceRange(0, 65000),
+			new AreaRange(35, 100),
 			OwnerType.Physical,
 			StatementPosition.Create(true, false, false),
 			[BuildingStatus.Old, BuildingStatus.New],
-			OrderBy.Price.Asc, Page: 1);
+			OrderBy.Price.Asc, 1);
 
 		var paginationInfo = await GetPaginationInfoAsync();
 		Console.WriteLine("Need to process {0} pages and {1} records", paginationInfo.Data.LastPage,
@@ -55,7 +55,7 @@ public sealed class RealEstateApiClient
 				JsonSerializer.Deserialize<GetStatementsResponse>(await response.Content.ReadAsStringAsync());
 
 			return statementsResponse?.Data.Statements ??
-			       throw new("Error occured during response mapping");
+			       throw new Exception("Error occured during response mapping");
 		}
 
 		async Task<GetStatementsCountResponse> GetPaginationInfoAsync()
@@ -76,13 +76,12 @@ public sealed class RealEstateApiClient
 			response.EnsureSuccessStatusCode();
 
 			return JsonSerializer.Deserialize<GetStatementsCountResponse>(await response.Content.ReadAsStringAsync()) ??
-			       throw new("Error occured during response mapping");
+			       throw new Exception("Error occured during response mapping");
 		}
 	}
 
-	public List<byte[]> GetRealEstateImages(RealEstateStatement statement) => statement.Images
-		.Select(x => _httpClient.GetByteArrayAsync(x.Large)
-			.GetAwaiter()
-			.GetResult())
+	public async Task<List<byte[]>> GetRealEstateImagesAsync(RealEstateStatement statement) =>
+		(await Task.WhenAll(statement.Images
+			.Select(async x => await _httpClient.GetByteArrayAsync(x.Large))))
 		.ToList();
 }
