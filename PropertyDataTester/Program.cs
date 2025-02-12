@@ -1,7 +1,7 @@
-﻿using PropertyDataTester;
-using PropertyDataTester.GetStatements;
+﻿using PropertyDataTester.MyHomeApi;
+using PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-var realEstateApiClient = new RealEstateApiClient();
+var realEstateApiClient = new RealEstateStatementsApiClient();
 var statements = await realEstateApiClient.GetFilteredRealEstateStatementsAsync();
 
 await DownloadAllImagesAsync(statements);
