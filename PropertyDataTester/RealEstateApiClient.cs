@@ -25,7 +25,7 @@ public sealed class RealEstateApiClient
 			new AreaRange(35, 100),
 			OwnerType.Physical,
 			StatementPosition.Create(true, false, false),
-			[BuildingStatus.Old, BuildingStatus.New],
+			[BuildingStatus.Old, BuildingStatus.New, BuildingStatus.UnderConstruction],
 			OrderBy.Price.Asc, 1);
 
 		var paginationInfo = await GetPaginationInfoAsync();
@@ -80,8 +80,8 @@ public sealed class RealEstateApiClient
 		}
 	}
 
-	public async Task<List<byte[]>> GetRealEstateImagesAsync(RealEstateStatement statement) =>
+	public async Task<List<(string Name, byte[] Data)>> GetRealEstateImagesAsync(RealEstateStatement statement) =>
 		(await Task.WhenAll(statement.Images
-			.Select(async x => await _httpClient.GetByteArrayAsync(x.Large))))
+			.Select(async x => (Path.GetFileName(x.Large), await _httpClient.GetByteArrayAsync(x.Large)))))
 		.ToList();
 }

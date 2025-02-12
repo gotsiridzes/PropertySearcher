@@ -1,5 +1,6 @@
 ﻿using System.Net.Mime;
 using PropertyDataTester;
+using PropertyDataTester.GetStatements;
 
 //var response = await new RealEstateApiClient().GetRealEstateStatementsAsync();
 
@@ -7,5 +8,25 @@ using PropertyDataTester;
 var realEstateApiClient = new RealEstateApiClient();
 var statements = await realEstateApiClient.GetFilteredRealEstateStatementsAsync();
 
-var images = realEstateApiClient.GetRealEstateImagesAsync(statements.First());
+//var images = realEstateApiClient.GetRealEstateImagesAsync(statements.First());
+
+await DownloadAllImagesAsync(statements);
+
+async Task DownloadAllImagesAsync(List<RealEstateStatement> realEstateStatements)
+{
+	int counter = 1;
+	foreach (var statement in realEstateStatements)
+	{
+		var images = await realEstateApiClient.GetRealEstateImagesAsync(statement);
+		Console.WriteLine("Downloading {0} images for statement {1}. {2}/{3}", images.Count, statement.Uuid, counter,
+			statements.Count);
+		var path = $"{statement.Price[statement.Currency].PriceTotal}-{statement.DynamicTitle}-{statement.Uuid}";
+		if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+
+		foreach (var (imageName, imageData) in images)
+			File.WriteAllBytes(Path.Combine(path, imageName), imageData);
+		counter++;
+	}
+}
+
 Console.ReadLine();
