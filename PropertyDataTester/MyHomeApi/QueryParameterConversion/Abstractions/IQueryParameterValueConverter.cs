@@ -1,4 +1,4 @@
-﻿namespace PropertyDataTester.MyHomeApi.QueryParameterConversion;
+﻿namespace PropertyDataTester.MyHomeApi.QueryParameterConversion.Abstractions;
 
 public interface IQueryParameterValueConverter
 {

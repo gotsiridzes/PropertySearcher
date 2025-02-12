@@ -1,4 +1,6 @@
-﻿namespace PropertyDataTester.MyHomeApi.QueryParameterConversion;
+﻿using PropertyDataTester.MyHomeApi.QueryParameterConversion.Abstractions;
+
+namespace PropertyDataTester.MyHomeApi.QueryParameterConversion.Implementations;
 
 public class EnumConverter : IQueryParameterValueConverter
 {

@@ -1,6 +1,7 @@
-﻿using System.Collections;
+﻿using PropertyDataTester.MyHomeApi.QueryParameterConversion.Abstractions;
+using System.Collections;
 
-namespace PropertyDataTester.MyHomeApi.QueryParameterConversion;
+namespace PropertyDataTester.MyHomeApi.QueryParameterConversion.Implementations;
 
 public class EnumListConverter : IQueryParameterValueConverter
 {

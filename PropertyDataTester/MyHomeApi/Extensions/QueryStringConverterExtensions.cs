@@ -1,10 +1,11 @@
 ﻿using System.Web;
 using PropertyDataTester.MyHomeApi.GetStatements.Models;
-using PropertyDataTester.MyHomeApi.QueryParameterConversion;
+using PropertyDataTester.MyHomeApi.QueryParameterConversion.Abstractions;
+using PropertyDataTester.MyHomeApi.QueryParameterConversion.Implementations;
 
 namespace PropertyDataTester.MyHomeApi.Extensions;
 
-public static class QueryStringConverter
+public static class QueryStringConverterExtensions
 {
 	private static readonly Dictionary<string, string> FieldMappings = new()
 	{

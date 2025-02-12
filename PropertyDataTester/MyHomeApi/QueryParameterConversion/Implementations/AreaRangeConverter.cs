@@ -1,7 +1,8 @@
 ﻿using System.Globalization;
 using PropertyDataTester.MyHomeApi.GetStatements.Models;
+using PropertyDataTester.MyHomeApi.QueryParameterConversion.Abstractions;
 
-namespace PropertyDataTester.MyHomeApi.QueryParameterConversion;
+namespace PropertyDataTester.MyHomeApi.QueryParameterConversion.Implementations;
 
 public class AreaRangeConverter : IQueryParameterValueConverter
 {
