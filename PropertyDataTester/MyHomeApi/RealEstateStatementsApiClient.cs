@@ -71,8 +71,8 @@ public sealed class RealEstateStatementsApiClient
 		}
 	}
 
-	public async Task<List<(string Name, byte[] Data)>> GetRealEstateImagesAsync(RealEstateStatement statement) =>
-		(await Task.WhenAll(statement.Images
+	public async Task<List<(string Name, byte[] Data)>> GetRealEstateImagesAsync(IEnumerable<ImageData> images) =>
+		(await Task.WhenAll(images
 			.Select(async x => (Path.GetFileName(x.Large), await _httpClient.GetByteArrayAsync(x.Large)))))
 		.ToList();
 }
