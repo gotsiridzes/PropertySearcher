@@ -17,20 +17,8 @@ public sealed class RealEstateStatementsApiClient
 		_httpClient.DefaultRequestHeaders.Add("X-Website-Key", "myhome");
 	}
 
-	public async Task<List<RealEstateStatement>> GetFilteredRealEstateStatementsAsync()
+	public async Task<List<RealEstateStatement>> GetFilteredRealEstateStatementsAsync(GetStatementsRequest request)
 	{
-		var request = new GetStatementsRequest(
-			[DealType.Sale],
-			[RealEstateType.Flat],
-			[Districts.VakeSaburtalo],
-			Currency.Usd,
-			new PriceRange(0, 65000),
-			new AreaRange(35, 100),
-			OwnerType.Physical,
-			StatementPosition.Create(true, false, false),
-			[BuildingStatus.Old, BuildingStatus.New, BuildingStatus.UnderConstruction],
-			OrderBy.Price.Asc, 1);
-
 		var paginationInfo = await GetPaginationInfoAsync();
 		Console.WriteLine("Need to process {0} pages and {1} records", paginationInfo.Data.LastPage,
 			paginationInfo.Data.Total);
