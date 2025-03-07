@@ -2,7 +2,7 @@
 
 namespace PropertyDataTester.MyHomeApi.GetStatements.Requests;
 
-public record GetStatementsCountRequests(
+public sealed record GetStatementsCountRequests(
 	List<DealType> DealTypes,
 	List<RealEstateType> RealEstateTypes,
 	List<Districts> Districts,
