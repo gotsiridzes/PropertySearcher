@@ -1,11 +1,11 @@
 ﻿namespace PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-public enum RealEstateType
+public enum RealEstateType : byte
 {
 	Flat = 1,
-	House = 2,
-	Cottage = 3,
-	Land = 4,
-	Commercial = 5,
+	House,
+	Cottage,
+	Land,
+	Commercial,
 	Hotel
 }

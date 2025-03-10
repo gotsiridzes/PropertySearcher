@@ -1,11 +1,11 @@
 ﻿namespace PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-public enum Districts
+public enum Districts : byte
 {
-	GldaniNadzaladevi = 1,
-	AroundTbilisi = 2,
-	DidubeChugureti = 3,
-	VakeSaburtalo = 4,
-	IsaniSamgori = 5,
-	OldTbilisi = 6
+    GldaniNadzaladevi = 1,
+    AroundTbilisi,
+    DidubeChugureti,
+    VakeSaburtalo,
+    IsaniSamgori,
+    OldTbilisi
 }

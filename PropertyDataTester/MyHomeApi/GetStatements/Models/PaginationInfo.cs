@@ -2,7 +2,7 @@
 
 namespace PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-public record PaginationInfo
+public sealed record PaginationInfo
 {
 	[JsonPropertyName("total")] public int Total { get; set; }
 

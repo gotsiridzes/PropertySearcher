@@ -2,7 +2,7 @@
 
 namespace PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-public record PriceDetail
+public sealed record PriceDetail
 {
 	[JsonPropertyName("price_total")] public decimal PriceTotal { get; set; }
 

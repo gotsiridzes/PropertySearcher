@@ -1,8 +1,8 @@
 ﻿namespace PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-public enum Currency
+public enum Currency : byte
 {
 	Gel = 1,
-	Usd = 2,
-	Eur = 3
+	Usd,
+	Eur
 }

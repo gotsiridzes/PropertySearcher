@@ -2,7 +2,7 @@
 
 namespace PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-public record PropertyParameter
+public sealed record PropertyParameter
 {
 	[JsonPropertyName("id")] public int Id { get; set; }
 

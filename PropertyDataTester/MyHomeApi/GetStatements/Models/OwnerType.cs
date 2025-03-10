@@ -2,9 +2,14 @@
 
 namespace PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-public enum OwnerType
+public enum OwnerType : byte
 {
-	[EnumMember(Value = "physical")] Physical,
-	Developer,
-	Agent
+	[EnumMember(Value = "physical")] 
+	Physical,
+
+    [EnumMember(Value = "developer")]
+    Developer,
+
+    [EnumMember(Value = "agent")]
+    Agent
 }
