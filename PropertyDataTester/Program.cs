@@ -13,7 +13,7 @@ var statements = await realEstateApiClient.GetFilteredRealEstateStatementsAsync(
 	new PriceRange(0, 65000),
 	new AreaRange(35, 100),
 	OwnerType.Physical,
-	StatementPosition.Create(true, false, false),
+	StatementPosition.NotFirstPosition,
 	[BuildingStatus.Old, BuildingStatus.New, BuildingStatus.UnderConstruction],
 	OrderBy.Price.Asc, 1));
 

@@ -2,7 +2,7 @@
 
 namespace PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-public record ImageData
+public sealed record ImageData
 {
 	[JsonPropertyName("large")] public string Large { get; set; } = null!;
 

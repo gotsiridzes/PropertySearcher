@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-public record RealEstateStatement
+public sealed record RealEstateStatement
 {
 	[JsonPropertyName("id")] public int Id { get; set; }
 

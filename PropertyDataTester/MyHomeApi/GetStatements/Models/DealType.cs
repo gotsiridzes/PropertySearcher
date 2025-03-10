@@ -1,6 +1,6 @@
 ﻿namespace PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-public enum DealType
+public enum DealType : byte
 {
 	Sale = 1,
 	Rent = 2,

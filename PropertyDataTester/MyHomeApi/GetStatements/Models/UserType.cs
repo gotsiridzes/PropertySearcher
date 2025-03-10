@@ -2,7 +2,7 @@
 
 namespace PropertyDataTester.MyHomeApi.GetStatements.Models;
 
-public record UserType
+public sealed record UserType
 {
 	[JsonPropertyName("type")]
 	[JsonConverter(typeof(JsonStringEnumConverter))]
