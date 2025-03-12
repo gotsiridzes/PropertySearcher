@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace PropertyDataTester.MyHomeApi.QueryParameterConversion.Implementations;
 
-public class EnumListConverter : IQueryParameterValueConverter
+public sealed class EnumListConverter : IQueryParameterValueConverter
 {
 	public bool CanConvert(object value) =>
 		value is IEnumerable list && list.Cast<object>().All(x => x is Enum);

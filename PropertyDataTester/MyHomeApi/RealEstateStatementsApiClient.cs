@@ -46,7 +46,7 @@ public sealed class RealEstateStatementsApiClient
 				JsonSerializer.Deserialize<GetStatementsResponse>(await response.Content.ReadAsStringAsync());
 
 			return statementsResponse?.Data.Statements ??
-			       throw new Exception("Error occured during response mapping");
+			       throw new Exception("Error occurred during response mapping");
 		}
 
 		async Task<GetStatementsCountResponse> GetPaginationInfoAsync()
@@ -67,7 +67,7 @@ public sealed class RealEstateStatementsApiClient
 			response.EnsureSuccessStatusCode();
 
 			return JsonSerializer.Deserialize<GetStatementsCountResponse>(await response.Content.ReadAsStringAsync()) ??
-			       throw new Exception("Error occured during response mapping");
+			       throw new Exception("Error occurred during response mapping");
 		}
 	}
 

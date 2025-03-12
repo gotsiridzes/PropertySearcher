@@ -2,12 +2,12 @@
 
 namespace PropertyDataTester.MyHomeApi.QueryParameterConversion.Implementations;
 
-public class DefaultConverter : IQueryParameterValueConverter
+public sealed class DefaultConverter : IQueryParameterValueConverter
 {
-	public bool CanConvert(object value) => true;
+    public bool CanConvert(object value) => true;
 
-	public IEnumerable<KeyValuePair<string, string>> Convert(object value, string key)
-	{
-		yield return new(key, value.ToString());
-	}
+    public IEnumerable<KeyValuePair<string, string>> Convert(object value, string key)
+    {
+        yield return new(key, value.ToString());
+    }
 }

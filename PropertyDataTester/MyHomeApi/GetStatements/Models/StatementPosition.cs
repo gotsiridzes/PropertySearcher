@@ -4,6 +4,7 @@ public readonly record struct StatementPosition
 {
     public static readonly StatementPosition NotFirstPosition = new(true, false, false);
     public static readonly StatementPosition NotLastPosition = new(false, true, false);
+    public static readonly StatementPosition IsLastPosition = new(false, false, true);
 
     private StatementPosition(
         bool notFirst,
