@@ -3,7 +3,7 @@ using PropertyDataTester.MyHomeApi.QueryParameterConversion.Abstractions;
 
 namespace PropertyDataTester.MyHomeApi.QueryParameterConversion.Implementations;
 
-public class StatementPositionConverter : IQueryParameterValueConverter
+public sealed class StatementPositionConverter : IQueryParameterValueConverter
 {
 	public bool CanConvert(object value) => value is StatementPosition;
 
